@@ -1,9 +1,11 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../firebase/firebase.config';
+import { GoogleAuthProvider } from "firebase/auth";
 
 export const ChefContext = createContext(null);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const ChefProvider = ({children}) => {
     const [chefs, setChefs] = useState([]);
@@ -52,8 +54,11 @@ const ChefProvider = ({children}) => {
         return signOut(auth);
     }
 
+    const googleLogIn = () =>{
+        return signInWithPopup(auth, provider);
+    }
+
     const chefInfo = {
-        displayName: 'mahfuzrp',
         chefs,
         recipe,
         signUp,
@@ -61,6 +66,8 @@ const ChefProvider = ({children}) => {
         logOut,
         user,
         loading,
+        auth,
+        googleLogIn
     }
     return (
         <ChefContext.Provider value={chefInfo}>

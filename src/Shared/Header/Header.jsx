@@ -1,18 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import brandLogo from '../../assets/logo.png'
 import './Header.css';
 import { FaUserAlt, FaArrowCircleRight } from 'react-icons/fa';
+import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
 
 
 const Header = () => {
-    const {user, logOut} = useContext(ChefContext);
+    const { user, logOut } = useContext(ChefContext);
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut()
-        .then()
-        .catch(error => console.log(error))
+            .then()
+            .catch(error => console.log(error))
+    }
+
+    const [activeButton, setActiveButton] = useState(2);
+
+    const handleClick = (buttonIndex) => {
+        setActiveButton(buttonIndex);
     }
 
     return (
@@ -23,16 +30,14 @@ const Header = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                     </label>
                     <ul tabIndex={0} className=" absolute z-50 menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/contact">Contact</Link></li>
+                        <li onClick={() => handleClick(0)} className={activeButton === 0 ? 'bg-orange-400 rounded-lg' : ''}><Link to="/">Home</Link></li>
+                        <li onClick={() => handleClick(1)} className={activeButton === 1 ? 'bg-orange-400 rounded-lg' : ''}><Link to="/blog">Blog</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About</Link></li>
-                        <li><Link to="/contact">Contact</Link></li>
+                        <li onClick={() => handleClick(0)} className={activeButton === 0 ? 'bg-orange-400 rounded-lg' : ''}><Link to="/">Home</Link></li>
+                        <li onClick={() => handleClick(1)} className={activeButton === 1 ? 'bg-orange-400 rounded-lg' : ''}><Link to="/blog">Blog</Link></li>
                     </ul>
                 </div>
             </div>
@@ -47,13 +52,12 @@ const Header = () => {
                     </div>
                 </button>
                 {
-                    user ? 
-                    <Link id='profile-btn' onClick={handleLogOut} className="btn btn-ghost btn-circle text-gray-400 hover:text-gray-600">
-                        <FaArrowCircleRight />
-                    </Link> :
-                    <Link to="/signup" id='profile-btn' className="btn btn-ghost btn-circle text-gray-400 hover:text-gray-600">
+                    <Link to="/profile" id='profile-btn' className="btn btn-ghost btn-circle text-gray-400 hover:text-gray-600">
                         <FaUserAlt />
                     </Link>
+                }
+                {
+                    user && <Link onClick={handleLogOut} className="btn btn-ghost btn-circle text-gray-400 hover:text-gray-600"><FiLogOut /></Link>
                 }
             </div>
         </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import Hero from '../Hero/Hero';
 import './Home.css'
 import Chef from '../Chef/Chef';
+import Services from '../Services/Services';
+import Posts from '../Posts/Posts';
 
 const Home = () => {
     return (
@@ -10,6 +12,8 @@ const Home = () => {
             <div className="chef-container">
                 <Chef></Chef>
             </div>
+            <Services></Services>
+            <Posts></Posts>
         </div>
     );
 };

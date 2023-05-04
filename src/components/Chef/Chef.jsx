@@ -8,12 +8,13 @@ import { FaUtensils, FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
+import { motion } from 'framer-motion';
 
 const Chef = () => {
     const {chefs} = useContext(ChefContext);
 
     return (
-        <div className="chef-parent">
+        <div className="chef-parent flex flex-col lg:flex-row items-center justify-center">
             <div className='chef-left'>
                 <Swiper
                     effect={"cards"}
@@ -49,9 +50,14 @@ const Chef = () => {
                 </Swiper>
             </div>
 
-            <div id='right-slider' className='shadow-md p-7 rounded-lg'>
+            <motion.div initial={{ x: "10rem", opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{
+                            duration: 5,
+                            type: "spring"
+                        }} className='shadow-md p-7 lg:w-5/12 rounded-lg'>
                 <div className="type-animation">
-                    <h1 className='text-4xl font-semibold mb-5 border-b-4  border-orange-400 w-fit'><span className='text-orange-400'>Kode</span> Rastaurand</h1>
+                    <h1 className='text-4xl text-center mx-auto font-semibold mb-5 border-b-4  border-orange-400 w-fit'><span className='text-orange-400'>Kode</span> Rastaurand</h1>
                     <div className='-mt-2 text-xl text-orange-400 font-medium'><span className=' text-gray-600 font-medium'>We Have In Our Country</span>{' '}
                     <TypeAnimation className=''
                         sequence={[
@@ -66,16 +72,16 @@ const Chef = () => {
                         ]}
                         repeat={Infinity}
                     /></div>
-                    <div className='max-w-sm text-center md:text-justify text-lg mt-5'>
+                    <div className='text-center md:text-justify text-lg mt-5'>
                         <p className='mb-3 text-gray-600'>Enjoy your delicious meals with our authentic fresh ingredients. Sourced from your local international food market</p>
                         <p className='mb-3 text-gray-600'>We have also partnered with <span className='text-orange-400'>DoorDash</span>, <span className='text-orange-400'>UberEats</span>, and <span className='text-orange-400'>Basefont</span>, for delivery straight to your door.</p>
                         <p className='mb-3 text-gray-600'>If you love <span className='text-orange-400'>Asian</span> <span className='text-orange-400'>Tasty</span>  <span className='text-orange-400'>Spicy</span>  foods. We will give you a taste of authentic you're not likely to find outside of <span className='text-orange-400'>Bangladesh</span>.</p>
                         <div className='mt-5 w-full flex md:justify-start justify-center'>
-                                <Link className='btn bg-orange-400 shadow-md border-0 px-10 rounded-none'>View Details</Link>
+                                <Link className='btn bg-orange-400 shadow-md border-0 px-10 rounded-none'>Explore More</Link>
                             </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 };

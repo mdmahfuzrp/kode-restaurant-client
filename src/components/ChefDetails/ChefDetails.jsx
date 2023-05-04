@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { BiHeart } from 'react-icons/bi';
 import './ChefDetails.css'
-import SingleRecipe from '../SingleRecipe/SingleRecipe';
+import { ToastContainer, toast } from 'react-toastify';
 
 const ChefDetails = () => {
     const { chefs, recipe } = useContext(ChefContext);
@@ -14,6 +14,21 @@ const ChefDetails = () => {
     const chef = chefs.find(chef => chef.id == id);
     console.log(chef);
 
+    const [btnStatus1, setBtnstatus1] = useState(false);
+    const [btnStatus2, setBtnstatus2] = useState(false);
+    const [btnStatus3, setBtnstatus3] = useState(false);
+
+    const handleDisable1 = () => {
+        toast('Here is your toast.');
+        toast.success('Wow added');
+        setBtnstatus1(true);
+    }
+    const handleDisable2 = () => {
+        setBtnstatus2(true);
+    }
+    const handleDisable3 = () => {
+        setBtnstatus3(true);
+    }
 
     return (
         <div>
@@ -96,7 +111,7 @@ const ChefDetails = () => {
                                 <img className='rounded-box object-cover h-full' style={{ width: '100%' }} src={mainRecipe?.recipe1?.recipe_img} alt="" />
                             </div>
                             <div className="divider lg:divider-horizontal">OR</div>
-                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 card border rounded-box p-5 px-7">
+                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 border rounded-box p-5 px-7">
                                 <h1>{mainRecipe?.recipe1?.recipe_name}</h1>
                                 <ul className="menu bg-base-100 w-full rounded-box mt-2 mb-5">
                                     {
@@ -111,7 +126,6 @@ const ChefDetails = () => {
                                         <div className="stat-title">{mainRecipe?.recipe1?.recipe_name}</div>
                                         <div className="stat-value text-blue-500 font-semibold">{mainRecipe?.recipe1?.cooking_method}</div>
                                     </div>
-
                                     <div className="stat md:w-full">
                                         <div className="stat-figure text-secondary">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -129,19 +143,21 @@ const ChefDetails = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn gap-2 mt-4 rounded-none">
+                                <button onClick={handleDisable1} disabled={btnStatus1} className="btn gap-2 mt-4 rounded-none">
                                     Add to Favourite
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+
+                                    <ToastContainer />
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div className="flex flex-col w-full md:w-11/12 mx-auto lg:flex-row px-7 my-5">
                             <div id="recipe-info" className="grid flex-grow w-11/12 md:w-2/4 bg-base-300 rounded-box place-items-center">
                                 <img className='rounded-box object-cover h-full' style={{ width: '100%' }} src={mainRecipe?.recipe2?.recipe_img} alt="" />
                             </div>
                             <div className="divider lg:divider-horizontal">OR</div>
-                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 card border rounded-box p-5 px-7">
+                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 border rounded-box p-5 px-7">
                                 <h1>{mainRecipe?.recipe2?.recipe_name}</h1>
                                 <ul className="menu bg-base-100 w-full rounded-box mt-2 mb-5">
                                     {
@@ -174,19 +190,19 @@ const ChefDetails = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn gap-2 mt-4 rounded-none">
+                                <button onClick={handleDisable2} disabled={btnStatus2} className="btn gap-2 mt-4 rounded-none">
                                     Add to Favourite
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div className="flex flex-col w-full md:w-11/12 mx-auto lg:flex-row px-7">
                             <div id="recipe-info" className="grid flex-grow w-11/12 md:w-2/4 bg-base-300 rounded-box place-items-center">
                                 <img className='rounded-box object-cover h-full' style={{ width: '100%' }} src={mainRecipe?.recipe3?.recipe_img} alt="" />
                             </div>
                             <div className="divider lg:divider-horizontal">OR</div>
-                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 card border rounded-box p-5 px-7">
+                            <div id="recipe-info" className="grid flex-grow  w-full md:w-2/4 border rounded-box p-5 px-7">
                                 <h1>{mainRecipe?.recipe3?.recipe_name}</h1>
                                 <ul className="menu bg-base-100 w-full rounded-box mt-2  mb-5">
                                     {
@@ -219,7 +235,7 @@ const ChefDetails = () => {
                                     </div>
                                 </div>
 
-                                <button className="btn gap-2 mt-4 rounded-none">
+                                <button onClick={handleDisable3} disabled={btnStatus3} className="btn gap-2 mt-4 rounded-none">
                                     Add to Favourite
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                 </button>

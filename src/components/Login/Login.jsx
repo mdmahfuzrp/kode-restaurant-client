@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
-import { FaUserAlt, FaArrowCircleRight } from 'react-icons/fa';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 const Login = () => {
-    const { login } = useContext(ChefContext);
+    const emailRef = useRef();
+    const { login, auth, googleLogIn } = useContext(ChefContext);
     const navigate = useNavigate();
 
 
@@ -20,7 +21,6 @@ const Login = () => {
         const password = form.password.value;
         console.log(name, email, password);
 
-
         login(email, password)
             .then(result => {
                 const outPut = result.user;
@@ -31,6 +31,33 @@ const Login = () => {
                 console.log(error);
             })
     }
+
+    const handleGoogleLogin = () => {
+        googleLogIn()
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            navigate(from, { replace: true })
+        })
+    }
+
+
+    const handleResetPassword = event =>{
+        const email = emailRef.current.value;
+
+        if(!email){
+            // toast
+            return;
+        }
+        sendPasswordResetEmail(auth, email)
+        .then(()=>{
+            // toast
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
+
     return (
         <div className="hero py-6">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -38,13 +65,13 @@ const Login = () => {
                     <h1 className="text-5xl font-bold">Login now!</h1>
                     <p className="py-6">Login your profile for continue your draft course and finished as soon as possible.</p>
                 </div>
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div className=" flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-5 rounded-3xl">
                     <form className="card-body pb-1" onSubmit={HandleLogin}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Enter email</span>
                             </label>
-                            <input type="email" placeholder="example@gmail.com" name='email' className="input input-bordered" required />
+                            <input type="email" ref={emailRef} placeholder="example@gmail.com" name='email' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -52,7 +79,7 @@ const Login = () => {
                             </label>
                             <input type="password" placeholder="Password" name='password' className="input input-bordered" required />
                             <label className="label">
-                                <Link className="label-text-alt link link-hover">Forgot password?</Link>
+                                <Link onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</Link>
                             </label>
                         </div>
                         <div className="form-control mt-4">
@@ -60,7 +87,7 @@ const Login = () => {
                         </div>
                     </form>
                     <label className="p-8 pt-1">
-                        <p>New in this site ? <Link to="/signup" className="text-blue-400 link link-hover">Register Now!</Link></p>
+                        <p className='text-center'>New in this site ? <Link to="/signup" className="text-blue-400 link link-hover">Register Now!</Link></p>
                     </label>
 
                     <div className='text-center mb-5 -mt-6 flex w-full justify-between px-10 items-center'>
@@ -71,7 +98,7 @@ const Login = () => {
 
                     <div className="form-control flex flex-row -mt-3 justify-center pb-4">
 
-                        <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/google.png" alt="" /></Link>
+                        <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' onClick={handleGoogleLogin} style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/google.png" alt="" /></Link>
 
                         <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/github.png" alt="" /></Link>
                     </div>

@@ -12,6 +12,11 @@ import ChefProvider from './ChefProviders/ChefProvider';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import Error from './components/Error/Error';
+import NotFound from './components/NotFound/NotFound';
+import Profile from './components/Profile/Profile';
+import Blog from './components/Blog/Blog';
+import Services from './components/Services/Services';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element:<Login></Login>
+      },
+      {
+        path: 'profile',
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>
+      },
+      {
+        path: '/blog',
+        element: <Blog></Blog>
+      },
+      {
+        path: "*",
+        element: <NotFound></NotFound>
       }
     ]
   }

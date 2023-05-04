@@ -1,0 +1,19 @@
+#error{
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 20px 0;
+}
+#error-btn a{
+    background-color: rgba(255, 0, 0, 0.646);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: .2s;
+}
+#error-btn a:hover{
+    background-color: red;
+}

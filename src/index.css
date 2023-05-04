@@ -20,3 +20,6 @@
     background-color: orange ;
   }
   
+  body{
+    overflow-x: hidden;
+  }

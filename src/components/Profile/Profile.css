@@ -1,0 +1,8 @@
+#profile-info p{
+    font-size: 18px;
+    margin: 10px;
+}
+#profile-info p span{
+    color: orange;
+    font-weight: 500;
+}
