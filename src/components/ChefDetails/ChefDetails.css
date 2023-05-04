@@ -1,0 +1,13 @@
+.stat .stat-title {
+    font-size: 16px;
+}
+
+.stat .stat-value {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+    #recipe-info {
+        width: 100%;
+    }
+}
