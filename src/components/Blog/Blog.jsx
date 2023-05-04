@@ -2,6 +2,7 @@ import React from "react";
 import Pdf from "react-to-pdf";
 import { FaDownload } from "react-icons/fa";
 import { useNavigation } from "react-router-dom";
+import './Blog.css'
 
 const Blog = () => {
     const ref = React.createRef();
@@ -18,7 +19,7 @@ const Blog = () => {
     return (
         <div className="my-5 container mx-auto">
             <div className="m-3 lg:w-2/4 mx-auto">
-                <div className="md:text-center">
+                <div className="md:text-center shadow-lg p-5">
                     <Pdf
                         targetRef={ref}
                         filename="blog.pdf"
@@ -31,7 +32,7 @@ const Blog = () => {
                             <div>
                                 <div className=" col-md-12 text-center mt-4">
                                     <button
-                                        className="btn-primary flex items-center justify-center  mx-auto"
+                                        className="btn flex items-center justify-center  mx-auto"
                                         onClick={toPdf}
                                     >
                                         <FaDownload className="me-3" />
@@ -42,10 +43,10 @@ const Blog = () => {
                         )}
                     </Pdf>
                 </div>
-                <div ref={ref}>
-                    <div className="flex flex-col justify-start items-start my-5 py-3">
+                <div ref={ref} id="react-to-pdf">
+                    <div className="shadow-lg p-5 rounded-lg  flex flex-col justify-start items-start my-5 py-3">
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#910000] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-orange-400 p-2 text-white rounded font-semibold">
                                 Question
                             </span>
                             <h1 className="ms-2 my-2">
@@ -54,7 +55,7 @@ const Blog = () => {
                             </h1>
                         </div>
                         <div className="md:flex items-center  my-1">
-                            <span className="bg-[#e19999] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-gray-600 p-2 text-white rounded font-semibold">
                                 Answer
                             </span>
                             <h1 className="ms-2 my-2">
@@ -66,9 +67,9 @@ const Blog = () => {
                             </h1>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-start items-start my-5 py-3">
+                    <div className="shadow-lg p-5 rounded-lg flex flex-col justify-start items-start my-5 py-3">
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#910000] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-orange-400 p-2 text-white rounded font-semibold">
                                 Question
                             </span>
                             <h1 className="ms-2 my-2">
@@ -76,7 +77,7 @@ const Blog = () => {
                             </h1>
                         </div>
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#e19999] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-gray-600 p-2 text-white rounded font-semibold">
                                 Answer
                             </span>
                             <h1 className="ms-2 my-2">
@@ -88,9 +89,9 @@ const Blog = () => {
                             </h1>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-start items-start my-5 py-3">
+                    <div className="shadow-lg p-5 rounded-lg flex flex-col justify-start items-start my-5 py-3">
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#910000] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-orange-400 p-2 text-white rounded font-semibold">
                                 Question
                             </span>
                             <h1 className="ms-2 my-2">
@@ -98,7 +99,7 @@ const Blog = () => {
                             </h1>
                         </div>
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#e19999] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-gray-600 p-2 text-white rounded font-semibold">
                                 Answer
                             </span>
                             <h1 className="ms-2 my-2">
@@ -111,9 +112,9 @@ const Blog = () => {
                             </h1>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-start items-start my-5 py-3">
+                    <div className="shadow-lg p-5 rounded-lg flex flex-col justify-start items-start my-5 py-3">
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#910000] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-orange-400 p-2 text-white rounded font-semibold">
                                 Question
                             </span>
                             <h1 className="ms-2 my-2">
@@ -121,7 +122,7 @@ const Blog = () => {
                             </h1>
                         </div>
                         <div className="md:flex items-center my-1">
-                            <span className="bg-[#e19999] p-2 text-white rounded font-semibold">
+                            <span className="faq-btn bg-gray-600 p-2 text-white rounded font-semibold">
                                 Answer
                             </span>
                             <h1 className="ms-2 my-2">
