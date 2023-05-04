@@ -4,6 +4,7 @@ import './Home.css'
 import Chef from '../Chef/Chef';
 import Services from '../Services/Services';
 import Posts from '../Posts/Posts';
+import CheckLazyLoad from '../CheckLazyLoad/CheckLazyLoad';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             </div>
             <Services></Services>
             <Posts></Posts>
+            <CheckLazyLoad></CheckLazyLoad>
         </div>
     );
 };
