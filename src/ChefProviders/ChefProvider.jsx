@@ -26,14 +26,14 @@ const ChefProvider = ({children}) => {
     },[])
 
     useEffect(()=>{
-        fetch('http://localhost:5500/all-chefs/recipe')
+        fetch('https://kode-restaurant-server-site-mahfuzrpsmorg-gmailcom.vercel.app/all-chefs/recipe')
         .then(res => res.json())
         .then(data => setRecipe(data))
         .catch(error => console.log(error))
     },[])
 
     useEffect(()=>{
-        fetch('http://localhost:5500/all-chefs')
+        fetch('https://kode-restaurant-server-site-mahfuzrpsmorg-gmailcom.vercel.app/all-chefs')
         .then(res => res.json())
         .then(data => setChefs(data))
         .catch(error => console.log(error))
