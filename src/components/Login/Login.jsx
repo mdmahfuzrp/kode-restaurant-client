@@ -9,10 +9,10 @@ import Swal from "sweetalert2";
 const Login = () => {
     const emailRef = useRef();
     const { login, auth, googleLogIn, gitHubLogin } = useContext(ChefContext);
-    const navigate = useNavigate();
+
 
     const [toggleIcon, setToggleIcon] = useState(false);
-
+    const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     const HandleLogin = (event) => {

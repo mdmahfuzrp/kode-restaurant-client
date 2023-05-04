@@ -6,5 +6,6 @@
 - I have many more component
 - Also I use react router, framer motion, lazy loading etc. etc. in this project
 
-- Live site Link: https://future-hub.netlify.app/
-- Source Code Link: https://github.com/Porgramming-Hero-web-course/b7a9-career-hub-mdmahfuzrp
+- Live site Link: https://kode-restaurant-server.web.app/
+- Client Link: https://github.com/programming-hero-web-course-4/b7a10-chef-recipe-hunter-client-side-mdmahfuzrp
+- Server Link: https://github.com/programming-hero-web-course-4/b7a10-chef-recipe-hunter-server-side-mdmahfuzrp

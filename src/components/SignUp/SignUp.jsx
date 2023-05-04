@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
 import { updateProfile } from 'firebase/auth';
 
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const [passwordStatus, setPasswordStatus] = useState(false);
 
     const { signUp } = useContext(ChefContext);
@@ -22,6 +26,7 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user);
                 updateUserData(user, name, photo);
+                navigate(from, { replace: true })
                 Swal.fire(
                     "Success!",
                     "Registration Successful!",
