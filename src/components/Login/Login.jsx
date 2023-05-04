@@ -1,18 +1,20 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
 import { sendPasswordResetEmail } from 'firebase/auth';
+import { BiShow, BiHide } from 'react-icons/bi';
+
+import Swal from "sweetalert2";
 
 const Login = () => {
     const emailRef = useRef();
-    const { login, auth, googleLogIn } = useContext(ChefContext);
+    const { login, auth, googleLogIn, gitHubLogin } = useContext(ChefContext);
     const navigate = useNavigate();
 
+    const [toggleIcon, setToggleIcon] = useState(false);
 
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-
-
     const HandleLogin = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -26,36 +28,90 @@ const Login = () => {
                 const outPut = result.user;
                 console.log(outPut);
                 navigate(from, { replace: true })
+                Swal.fire(
+                    "Success!",
+                    "Successfully added into Favorite!",
+                    "success"
+                );
             })
             .catch(error => {
                 console.log(error);
+                Swal.fire(
+                    "Oops!",
+                    "Email Password Incorrect!",
+                    "error"
+                );
             })
     }
 
-    const handleGoogleLogin = () => {
-        googleLogIn()
+    const handleGithubLogin = () =>{
+        gitHubLogin()
         .then(result => {
             const loggedUser = result.user;
             console.log(loggedUser);
             navigate(from, { replace: true })
+            Swal.fire(
+                "Success!",
+                "Login Successful!",
+                "success"
+            );
         })
+        .catch(error => {
+            console.log(error.message);
+            Swal.fire(
+                "Oops!",
+                "Something went wrong!",
+                "error"
+            );
+        })
+    }
+    const handleGoogleLogin = () => {
+        googleLogIn()
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                navigate(from, { replace: true })
+                Swal.fire(
+                    "Success!",
+                    "Successfully added into Favorite!",
+                    "success"
+                );
+            })
     }
 
 
-    const handleResetPassword = event =>{
+    const handleShowPassword = () => {
+        setToggleIcon(!toggleIcon);
+    }
+
+
+    const handleResetPassword = event => {
         const email = emailRef.current.value;
 
-        if(!email){
+        if (!email) {
             // toast
-            return;
+            return Swal.fire(
+                "Oops!",
+                "Recipe Remove From Favorite!",
+                "error"
+            );
         }
         sendPasswordResetEmail(auth, email)
-        .then(()=>{
-            // toast
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(() => {
+                Swal.fire(
+                    "Success!",
+                    "Check your email and verify now!",
+                    "success"
+                );
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.fire(
+                    "Oops!",
+                    "Recipe Remove From Favorite!",
+                    "error"
+                );
+            })
     }
 
     return (
@@ -77,9 +133,15 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Enter password</span>
                             </label>
-                            <input type="password" placeholder="Password" name='password' className="input input-bordered" required />
+                            <input type={toggleIcon ? 'text' : 'password'} placeholder="Password" name='password' className="relative input input-bordered" required />
+                            <div onClick={handleShowPassword} className='absolute cursor-pointer text-gray-600' style={{left: '34%', top: '51%'}}>
+                                {
+                                    toggleIcon ? <BiShow size={20} /> : <BiHide size={20} />
+                                }
+                            </div>
                             <label className="label">
                                 <Link onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</Link>
+
                             </label>
                         </div>
                         <div className="form-control mt-4">
@@ -100,7 +162,7 @@ const Login = () => {
 
                         <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' onClick={handleGoogleLogin} style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/google.png" alt="" /></Link>
 
-                        <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/github.png" alt="" /></Link>
+                        <Link><img className='mx-2 cursor-pointer hover:-mt-1 duration-300' onClick={handleGithubLogin} style={{ width: '40px' }} src="https://raw.githubusercontent.com/mdmahfuzrp/futurehub-img/main/Icons/github.png" alt="" /></Link>
                     </div>
                 </div>
             </div>

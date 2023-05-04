@@ -16,7 +16,7 @@ import Error from './components/Error/Error';
 import NotFound from './components/NotFound/NotFound';
 import Profile from './components/Profile/Profile';
 import Blog from './components/Blog/Blog';
-import Services from './components/Services/Services';
+
 
 const router = createBrowserRouter([
   {

@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChefContext } from '../../ChefProviders/ChefProvider';
-
-import { BiShow, BiHide } from 'react-icons/bi';
 import { updateProfile } from 'firebase/auth';
 
 
@@ -23,10 +21,20 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                updateUserData(user, name, photo)
+                updateUserData(user, name, photo);
+                Swal.fire(
+                    "Success!",
+                    "Registration Successful!",
+                    "success"
+                  );
             })
             .catch(error => {
                 console.log(error);
+                Swal.fire(
+                    "Oops!",
+                    "Something went wrong, please try again!",
+                    "error"
+                  );
             })
     }
 
@@ -80,11 +88,6 @@ const SignUp = () => {
                                 <span className="label-text">Your password</span>
                             </label>
                             <input type={passwordStatus ? 'text' : 'password'} placeholder="Password" name='password' className="relative input input-bordered" required />
-                            <span onClick={handleShowHide} className='text-orange-400 absolute right-9 bottom-52 mb-1 me-1 cursor-pointer'>
-                                {
-                                    passwordStatus ? <BiShow size={25} /> : <BiHide size={25}  /> 
-                                }   
-                            </span>
                         </div>
                         <div className="form-control mt-4">
                             <button className="btn bg-orange-400 border-0">Register</button>
@@ -93,11 +96,6 @@ const SignUp = () => {
                     <label className="p-10">
                         <p className='text-center'>Already have an account ? <Link to="/login" className="text-blue-400 link link-hover">Login Now!</Link></p>
                     </label>
-                    <div className='text-center mb-5 -mt-6 flex w-full justify-between px-10 items-center'>
-                        <div className="line w-5/12 border h-0 bg-gray-400"></div>
-                        <div className="line">or</div>
-                        <div className="line w-5/12 border h-0 bg-gray-400"></div>
-                    </div>
                 </div>
             </div>
         </div>
