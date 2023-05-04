@@ -3,6 +3,7 @@ import { ChefContext } from '../../ChefProviders/ChefProvider';
 import { Link, useParams } from 'react-router-dom';
 import { FaHeart } from 'react-icons/fa';
 import { BiHeart } from 'react-icons/bi';
+import LazyLoad from 'react-lazy-load';
 import './ChefDetails.css'
 import Swal from "sweetalert2";
 
@@ -72,7 +73,7 @@ const ChefDetails = () => {
                     <div className="banner flex flex-col items-center mt-5 px-7">
                         <div className="avatar">
                             <div className="w-24 rounded-full ring ring-orange-400 ring-offset-base-100 ring-offset-2">
-                                <img src={chef?.chef_picture} />
+                            <img src={chef?.chef_picture} />
                             </div>
                         </div>
                         <h1 className='mt-4 text-2xl font-medium text-gray-700'>{chef?.chef_name}</h1>

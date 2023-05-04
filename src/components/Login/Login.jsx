@@ -141,7 +141,6 @@ const Login = () => {
                             </div>
                             <label className="label">
                                 <Link onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</Link>
-
                             </label>
                         </div>
                         <div className="form-control mt-4">
